@@ -5,6 +5,7 @@ Bem-vindo ao repositório de Desafios JavaScript! Este repositório contém uma 
 Cada pasta dentro deste repositório contém um desafio específico, incluindo a descrição do problema, exemplos de entrada e saída, e uma possível solução. Sinta-se à vontade para explorar, modificar e contribuir com suas próprias soluções!
 
 Estrutura do Repositório
+
 Desafio 1: Calculadora de Nível de Herói
 
 Desafio 2: Calculadora de Partidas Rankeadas

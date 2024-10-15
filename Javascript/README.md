@@ -9,6 +9,8 @@ Desafio 1: Calculadora de Nível de Herói
 
 Desafio 2: Calculadora de Partidas Rankeadas
 
+Desafio 3: Classes de um Jogo
+
 Outros virão...
 
 📝 Como Contribuir

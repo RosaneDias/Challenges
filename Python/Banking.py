@@ -1,82 +1,68 @@
-def mostrar_menu():
+def show_menu():
     print("""
-  Please, select an option:
+Please select an option:
 
-  1 - Statement
-  2 - Withdraw
-  3 - Deposit
-  4 - Exit
+1 - View Statement
+2 - Make a Withdrawal
+3 - Make a Deposit
+4 - Exit
 """)
 
-def mostrar_extrato(statement, balance):
-    print("********************* Bank Statement *********************")
-    print(statement if statement else "No transactions recorded.")
-    print(f'Balance: $ {balance:.2f}')
-    print("**********************************************************")
+def show_statement(statement, balance):
+    print("******************** BANK STATEMENT ********************")
+    if statement:
+        print(statement)
+    else:
+        print("No transactions recorded.")
+    print(f"Current Balance: $ {balance:.2f}")
+    print("*******************************************************")
 
-def sacar(balance, limit, num_withdraws, max_withdraws, statement):
+def perform_withdrawal(balance, limit, withdrawals_made, max_withdrawals, statement):
     try:
-        valor = float(input("Please, enter the withdraw value: "))
-        if valor <= 0:
-            print("❌ Invalid value! Must be greater than zero.")
-        elif num_withdraws >= max_withdraws:
-            print(f"❌ Withdraw limit reached: {max_withdraws} per day.")
-        elif valor > limit:
-            print(f"❌ Exceeds per-operation limit of $ {limit:.2f}")
-        elif valor > balance:
-            print("❌ Insufficient funds.")
+        amount = float(input("Enter the amount to withdraw: "))
+        if amount <= 0:
+            print("❌ Invalid amount! Please enter a positive value.")
+        elif withdrawals_made >= max_withdrawals:
+            print(f"❌ Withdrawal limit reached: maximum of {max_withdrawals} withdrawals allowed.")
+        elif amount > limit:
+            print(f"❌ Amount exceeds the per-transaction limit of $ {limit:.2f}.")
+        elif amount > balance:
+            print("❌ Insufficient balance.")
         else:
-            balance -= valor
-            statement += f'Withdraw: $ {valor:.2f}\n'
-            num_withdraws += 1
-            print(f"✅ Withdraw completed. You have used {num_withdraws} of {max_withdraws} withdrawals.")
+            balance -= amount
+            statement += f"Withdrawal: $ {amount:.2f}\n"
+            withdrawals_made += 1
+            print(f"✅ Withdrawal successful. You have used {withdrawals_made}/{max_withdrawals} withdrawals.")
     except ValueError:
         print("❌ Invalid input. Please enter a numeric value.")
 
-    return balance, num_withdraws, statement
+    return balance, withdrawals_made, statement
 
-def depositar(balance, statement):
+def perform_deposit(balance, statement):
     try:
-        valor = float(input("Please, enter the deposit value: "))
-        if valor <= 0:
-            print("❌ Invalid value! Must be greater than zero.")
+        amount = float(input("Enter the amount to deposit: "))
+        if amount <= 0:
+            print("❌ Invalid amount! Please enter a positive value.")
         else:
-            balance += valor
-            statement += f'Deposit: $ {valor:.2f}\n'
+            balance += amount
+            statement += f"Deposit: $ {amount:.2f}\n"
             print("✅ Deposit successful!")
     except ValueError:
         print("❌ Invalid input. Please enter a numeric value.")
 
     return balance, statement
 
-# Inicialização
+# Initialization
 balance = 0.0
-limit = 500.0
-num_withdraws = 0
-max_withdraws = 3
+withdrawal_limit = 500.0
+withdrawals_made = 0
+max_withdrawals = 3
 statement = ""
 
-# Loop principal
+# Main loop
 while True:
-    mostrar_menu()
+    show_menu()
     try:
         option = int(input("Your choice: "))
     except ValueError:
-        print("❌ Invalid option! Please enter a number between 1 and 4.")
-        continue
-
-    if option == 1:
-        mostrar_extrato(statement, balance)
-
-    elif option == 2:
-        balance, num_withdraws, statement = sacar(balance, limit, num_withdraws, max_withdraws, statement)
-
-    elif option == 3:
-        balance, statement = depositar(balance, statement)
-
-    elif option == 4:
-        print("👋 Thank you for using our banking system. Goodbye!")
-        break
-
-    else:
-        print("❌ Invalid option! Please select a valid one.")
+        print("❌ Invalid choice! Please ente
